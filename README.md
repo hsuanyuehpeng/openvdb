@@ -99,6 +99,14 @@ This requires the basic knowledge on:
     ```
   
 ## Buliding OpenVDB lib
+  - [vs2013 syntax error when compiling LeafNode.h](http://www.openvdb.org/forum/?place=msg%2Fopenvdb-forum%2FVHJelGwmo8I%2FoExDaKvCbMsJ)
+    When you encounter:
+```
+error C2226: syntax error : unexpected type 'SIZE'	openvdb\tree\LeafNode.h 79
+error C2065: 'LEVEL' : undeclared identifier	openvdb\tree\InternalNode.h	74
+... and more
+```
+  - t
 
 ## Buliding OpenVDB viewer/raytracer samples
 
