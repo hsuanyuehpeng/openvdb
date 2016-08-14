@@ -9,7 +9,7 @@ This readme is made by Hsuan-Yueh Peng, which aims to compile the openvdb lib on
     Platform: x64
     Lib type: static lib
 
-## Prerequisite
+## Prerequisites
 This requires the basic knowledge on:
   - Software/Building Tools
     - Visual Studio 2013
@@ -21,8 +21,17 @@ This requires the basic knowledge on:
     - [OpenEXR](http://www.openexr.com/downloads.html) (*openexr-2.2.0.tar.gz* used here)
     - [TBB](https://www.threadingbuildingblocks.org/download#stable-releases)(*4.4 Update 5* statble release used here)
 
-## Building prerequisite
+## Building prerequisites
   - Boost
+    - Once you download and extract the boost prebuilt package, you can put it somewhere in your filesystem. For me I put the package under:
+    ```
+      D:\libs\boost\v1.57.0\prebuilt
+    ```
+    - You will see the extracted package sits in (I know the structure looks dump, but that's how I do it :P):
+    ```
+      D:\libs\boost\v1.57.0\prebuilt\boost_1_57_0
+    ```
+      
   - zlib
   - Ilmbase
   - OpenEXR
