@@ -101,11 +101,34 @@ This requires the basic knowledge on:
 ## Buliding OpenVDB lib
   - [vs2013 syntax error when compiling LeafNode.h](http://www.openvdb.org/forum/?place=msg%2Fopenvdb-forum%2FVHJelGwmo8I%2FoExDaKvCbMsJ)
     When you encounter:
-```
-error C2226: syntax error : unexpected type 'SIZE'	openvdb\tree\LeafNode.h 79
-error C2065: 'LEVEL' : undeclared identifier	openvdb\tree\InternalNode.h	74
-... and more
-```
+    ```
+      error C2226: syntax error : unexpected type 'SIZE'	openvdb\tree\LeafNode.h 79
+      error C2065: 'LEVEL' : undeclared identifier	openvdb\tree\InternalNode.h	74
+    ```
+    
+    Replace:
+    ```
+    static const Index
+		LOG2DIM = Log2Dim,      // needed by parent nodes
+		TOTAL = Log2Dim,      // needed by parent nodes
+		DIM = 1 << TOTAL,   // dimension along one coordinate direction
+		NUM_VALUES = 1 << 3 * Log2Dim,
+		NUM_VOXELS = NUM_VALUES,  // total number of voxels represented by this node
+		SIZE = NUM_VALUES,
+        	LEVEL       = 0;            // level 0 = leaf
+    ```
+    with:
+    ```
+    static const Index
+		LOG2DIM = Log2Dim,      // needed by parent nodes
+		TOTAL = Log2Dim,      // needed by parent nodes
+		DIM = 1 << TOTAL,   // dimension along one coordinate direction
+		NUM_VALUES = 1 << 3 * Log2Dim,
+		NUM_VOXELS = NUM_VALUES;   // total number of voxels represented by this node
+	static const Index
+		SIZE = NUM_VALUES,
+        	LEVEL       = 0;            // level 0 = leaf
+    ```
   - t
 
 ## Buliding OpenVDB viewer/raytracer samples
