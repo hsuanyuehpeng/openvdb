@@ -1,5 +1,7 @@
 [Original OpenVDB README](https://github.com/hsuanyuehpeng/openvdb/blob/master/README_OpenVDB.md)
 
+##Note: This readme is not yet finished, more details are needed to be filled in.. (Aug 14, 2016 HY)
+
 #OpenVDB Building on Windows, VS2013, x64
 
 ## Purpose
@@ -20,6 +22,10 @@ This requires the basic knowledge on:
     - [Ilmbase](http://www.openexr.com/downloads.html) (*ilmbase-2.2.0.tar.gz* used here)    
     - [OpenEXR](http://www.openexr.com/downloads.html) (*openexr-2.2.0.tar.gz* used here)
     - [TBB](https://www.threadingbuildingblocks.org/download#stable-releases)(*4.4 Update 5* statble release used here)
+  - Extra/Optional dependencies
+    - [python] (https://www.python.org/downloads/windows/) (*Windows x86-64 build* version: 2.7.* whichever you feel comfortable) This will be used in boost and openvdb.
+    - [glew](http://glew.sourceforge.net/) (*source*) Only if you want to build the sample viewer/tracer.
+    - [glfw](http://www.glfw.org/) (*source*) Only if you want to build the sample viewer/tracer.
 
 ## Building prerequisites
   - Boost
@@ -31,11 +37,66 @@ This requires the basic knowledge on:
     ```
       D:\libs\boost\v1.57.0\prebuilt\boost_1_57_0
     ```
-      
   - zlib
+    - Downdload and extract your zlib sources into
+    ```
+      D:\libs\zlib\source
+    ```
+    - To be clear, you should see the full path of zlib.h like this
+    ```
+      D:\libs\zlib\source\zlib.h
+    ```
+    - Use cmake to point the source path to
+    ```
+      D:\libs\zlib\source
+    ```
+    - Build path to
+    ```
+      D:\libs\zlib\build
+    ```
+    - Configure with Visual Studio 2013 win64
+    - Generate
+    - Open the zlib vs2013 solution (D:\libs\zlib\build\zlib.sln)
+    - Turn the code generation into
+      - /MT for Release build
+      - /MTd for Debug build
+    - Build the solution on both Release and Debug configuration (and pay attention to the built destination)
+    
   - Ilmbase
+    - Downdload and extract ilmbase sources into
+    ```
+      D:\libs\ilmbase\v2.2.0\source
+    ```
+    - CMake source path
+    ```
+      D:\libs\ilmbase\v2.2.0\source
+    ```
+    - Cmake build path
+    ```
+      D:\libs\ilmbase\v2.2.0\build
+    ```
+    - Configure -> Generate -> Tuning *Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
+    
   - OpenEXR
+    - Same as Ilmbase, downdload and extract openexr sources into
+    ```
+      D:\libs\openexr\v2.2.0\source
+    ```
+    - CMake source path
+    ```
+      D:\libs\openexr\v2.2.0\source
+    ```
+    - Cmake build path
+    ```
+      D:\libs\openexr\v2.2.0\build
+    ```
+    - Configure -> Generate -> Tuning *Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
+    
   - TBB
+    - Downdload and extract openexr sources into
+    ```
+      D:\libs\tbb\v44u5\source
+    ```
   
 ## Buliding OpenVDB lib
 
