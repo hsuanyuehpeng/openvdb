@@ -22,10 +22,10 @@ This requires the basic knowledge on:
     - [Ilmbase](http://www.openexr.com/downloads.html) (*ilmbase-2.2.0.tar.gz* used here)    
     - [OpenEXR](http://www.openexr.com/downloads.html) (*openexr-2.2.0.tar.gz* used here)
     - [TBB](https://www.threadingbuildingblocks.org/download#stable-releases)(*4.4 Update 5* statble release used here)
-  - Extra/Optional dependencies
     - [python] (https://www.python.org/downloads/windows/) (*Windows x86-64 build* version: 2.7.* whichever you feel comfortable) This will be used in boost and openvdb.
+  - Extra/Optional dependencies
     - [glew](http://glew.sourceforge.net/) (*source*) Only if you want to build the sample viewer/tracer.
-    - [glfw](http://www.glfw.org/) (*source*) Only if you want to build the sample viewer/tracer.
+    - [glfw](http://www.glfw.org/) (glfw3 *source*) Only if you want to build the sample viewer/tracer. Some people say you can only build the sample viewer/tracer on glfw2, that's __NOT__ true, you can easily build the current version with glfw3.
 
 ## Building prerequisites
   - Boost
@@ -61,6 +61,11 @@ This requires the basic knowledge on:
       - /MT for Release build
       - /MTd for Debug build
     - Build the solution on both Release and Debug configuration (and pay attention to the built destination)
+    - Dependents on zlib fail in cmake buliding process:
+      - [To be exlained..](http://stackoverflow.com/questions/24808150/how-to-point-cmake-to-zlib-include-path)
+      - cmake -DZLIB_LIBRARY:FILEPATH="C:/path/to/zlib/zlib.lib"
+      - -DZLIB_INCLUDE_DIR:PATH="c:/path/to/zlib/include" .
+
     
   - Ilmbase
     - Downdload and extract ilmbase sources into
@@ -97,8 +102,27 @@ This requires the basic knowledge on:
     ```
       D:\libs\tbb\v44u5\source
     ```
+  - python
+    - to be filled
   
 ## Buliding OpenVDB lib
+  - Preprocessor
+  ```
+    BOOST_PYTHON_STATIC_LIB // for boost linking correctly
+    OPENVDB_OPENEXR_STATICLIB
+    GLEW_STATIC             // <= only if you also want to build sample viewer/tracer
+    OPENVDB_USE_GLFW_3		// <= only if you also want to build sample viewer/tracer
+  ``` 
+  - Macro define before including some headers
+    - Whenever you see vs2013 complaining about min/max function name(s) (Coord.h, ..etc.)
+    ```
+      #define NOMINMAX //(thx vs2013..)
+    ```
+    - In Compression.cc (based on [this](http://www.winimage.com/zLibDll/index.html) with *"Make sure to define ZLIB_WINAPI before including zlib.h."*)
+    ```
+       #define ZLIB_WINAPI
+    ```
+  
   - [vs2013 syntax error when compiling LeafNode.h](http://www.openvdb.org/forum/?place=msg%2Fopenvdb-forum%2FVHJelGwmo8I%2FoExDaKvCbMsJ)
     When you encounter:
     ```
@@ -132,7 +156,8 @@ This requires the basic knowledge on:
   - t
 
 ## Buliding OpenVDB viewer/raytracer samples
-
+  - Add glewInit() from [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/)
 ## Reference
  - [rchoetzlein/win_openvdb](https://github.com/rchoetzlein/win_openvdb)
  - [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/)
+ - [Wen tao. Wang](http://www.cnblogs.com/warpengine/p/3462359.html) (Chinese only)
