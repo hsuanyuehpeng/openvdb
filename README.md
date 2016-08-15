@@ -107,12 +107,15 @@ This requires the basic knowledge on:
   
 ## Buliding OpenVDB lib
   - Preprocessor
-  ```
-    BOOST_PYTHON_STATIC_LIB // for boost linking correctly
-    OPENVDB_OPENEXR_STATICLIB
-    GLEW_STATIC             // <= only if you also want to build sample viewer/tracer
-    OPENVDB_USE_GLFW_3		// <= only if you also want to build sample viewer/tracer
-  ``` 
+    ```
+      BOOST_PYTHON_STATIC_LIB // for boost linking correctly
+      
+      OPENVDB_OPENEXR_STATICLIB
+      
+      GLEW_STATIC             // <= only if you also want to build sample viewer/tracer
+      
+      OPENVDB_USE_GLFW_3		// <= only if you also want to build sample viewer/tracer
+    ``` 
   - Macro define before including some headers
     - Whenever you see vs2013 complaining about min/max function name(s) (Coord.h, ..etc.)
     ```
