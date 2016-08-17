@@ -1,6 +1,6 @@
 [Original OpenVDB README](https://github.com/hsuanyuehpeng/openvdb/blob/master/README_OpenVDB.md)
 
-##Note: This readme is not yet finished, more details are needed to be filled in.. (Aug 17, 2016 HY)
+##Note: This readme is not 100% complete yet, but it should get you going in building openvdb static lib.
 
 #OpenVDB Building on Windows, VS2013, x64
 
@@ -104,8 +104,13 @@ This requires the basic knowledge on:
   - python
     - Download from [here](https://www.python.org/download/releases/2.7/) and make sure you click "Windows X86-64 MSI Installer (2.7.0)" for x64 installation
     - python3 should also work, although in my openvdb build, I'm using python2
+    
+  - glew & glfw
+    - Similar cmake with static preprocessor*, will not include in this breakdown readme
   
 ## Buliding OpenVDB lib
+  - You can drag all the source(s) (*.cpp/*.h) into a new visual studio solution with a new empty project. Then exclude all the main.cpp's and Test*.cc's from the build process.
+  - Switch to static lib build and make sure you have /MT and /MTd for Release and Debug config. respectively
   - Preprocessor
     ```
       BOOST_PYTHON_STATIC_LIB // for boost linking correctly
@@ -164,7 +169,19 @@ This requires the basic knowledge on:
     ```
       #include <openvdb/viewer/Viewer.h>
     ```
+    - Find all files that do this:
+    ```
+      #include <GL/gl.h>
+      #include <GL/glu.h>
+    ```
+      and replace them with
+    ```
+      #include <GL/glew.h>
+    ```
+    - Add OPENVDB_USE_GLFW_3 into your preprocessor and replace *#include <GL/glfw.h>* with *#include <GLFW/glfw3.h>*
     - Add *openvdb* static lib project into your project reference (Proj. Properties -> Common Properties -> References -> Add New Reference...)
+    - Don't forget to add glew/glfw into your include folder path, also inputs to the linker
+    - Also need to add opengl32.lib and glu32.lib from windows' sdk
     - You should be able to compile and run the viewer after this
     - According to [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/), the viewer fails to initialize the gl function pointers before calling for each thread. So add "glewInit();" to some blocks like this:
   
