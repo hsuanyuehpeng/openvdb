@@ -79,7 +79,7 @@ This requires the basic knowledge on:
     ```
       D:\libs\ilmbase\v2.2.0\build
     ```
-    - Configure -> Generate -> Tuning *Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
+    - Tuning *Configure -> Generate -> Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
     
   - OpenEXR
     - Same as Ilmbase, downdload and extract openexr sources into
@@ -94,7 +94,7 @@ This requires the basic knowledge on:
     ```
       D:\libs\openexr\v2.2.0\build
     ```
-    - Configure -> Generate -> Tuning *Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
+    - Tuning *Configure -> Generate -> Code Generation* as in zlib build step -> Build solution on both Release and Debug configs.
     
   - TBB
     - Downdload and extract openexr sources into
@@ -109,6 +109,7 @@ This requires the basic knowledge on:
     - Similar cmake with static preprocessor*, will not include in this breakdown readme
   
 ## Buliding OpenVDB lib
+  - One thing you need to make sure is that we are not using cmake to build openvdb (you could, if you follow [this](https://github.com/rchoetzlein/win_openvdb)), so we need to add all dependencies' include paths manually. This could take a bit of time, but all you need to do is to find the headers for each lib into where OpenVDB is looking for. For example, I put Ilmbase related headers in *[D:\libs\ilmbase\v2.2.0\source\include\OpenEXR]* and add *[D:\libs\ilmbase\v2.2.0\source\include]* into the project's additional include directories so that it can find *[OpenEXR\half.h]*. If you understand that, the same analogy applies onto other libs as well.
   - You can drag all the source(s) (*.cpp/*.h) into a new visual studio solution with a new empty project. Then exclude all the main.cpp's and Test*.cc's from the build process.
   - Switch to static lib build and make sure you have /MT and /MTd for Release and Debug config. respectively
   - Preprocessor
@@ -161,7 +162,6 @@ This requires the basic knowledge on:
 		SIZE = NUM_VALUES,
         	LEVEL       = 0;            // level 0 = leaf
     ```
-  - t
 
 ## Buliding OpenVDB viewer/raytracer samples
   - Viewer
