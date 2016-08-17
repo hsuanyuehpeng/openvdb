@@ -1,6 +1,6 @@
 [Original OpenVDB README](https://github.com/hsuanyuehpeng/openvdb/blob/master/README_OpenVDB.md)
 
-##Note: This readme is not yet finished, more details are needed to be filled in.. (Aug 14, 2016 HY)
+##Note: This readme is not yet finished, more details are needed to be filled in.. (Aug 17, 2016 HY)
 
 #OpenVDB Building on Windows, VS2013, x64
 
@@ -61,12 +61,11 @@ This requires the basic knowledge on:
       - /MT for Release build
       - /MTd for Debug build
     - Build the solution on both Release and Debug configuration (and pay attention to the built destination)
-    - Dependents on zlib fail in cmake buliding process:
-      - [To be exlained..](http://stackoverflow.com/questions/24808150/how-to-point-cmake-to-zlib-include-path)
-      - cmake -DZLIB_LIBRARY:FILEPATH="C:/path/to/zlib/zlib.lib"
-      - -DZLIB_INCLUDE_DIR:PATH="c:/path/to/zlib/include" .
-
-    
+    - Side note: if you seen any other lib's cmake configuration erorr: *Could NOT find ZLIB (missing: ZLIB_LIBRARY ZLIB_INCLUDE_DIR)* that depends on zlib (according to [this](http://stackoverflow.com/questions/24808150/how-to-point-cmake-to-zlib-include-path)):
+      - check the "Advanced" checkbox in cmake gui
+      - set "ZLIB_LIBRARY" to your zlib library folder, where zlib.lib or zlibstatic.lib is contained
+      - set "ZLIB_INCLUDE_DIR" to your zlib include folder, where zlib.h is contained
+      
   - Ilmbase
     - Downdload and extract ilmbase sources into
     ```
