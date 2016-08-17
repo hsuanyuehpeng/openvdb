@@ -1,6 +1,6 @@
 [Original OpenVDB README](https://github.com/hsuanyuehpeng/openvdb/blob/master/README_OpenVDB.md)
 
-##Note: This readme is not 100% complete yet, but it should get you going in building openvdb static lib.
+##Note: README not 100% complete yet, but should get you going in building the static lib.
 
 #OpenVDB Building on Windows, VS2013, x64
 
