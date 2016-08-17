@@ -159,7 +159,14 @@ This requires the basic knowledge on:
   - t
 
 ## Buliding OpenVDB viewer/raytracer samples
-  - According to [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/), the viewer fails to initialize the gl function pointers before calling for each thread. So add "glewInit();" to some blocks like this:
+  - Viewer
+    - Make another project under the same solution and add *[D:\libs\openvdb\v3.2.0\source\openvdb\cmd\openvdb_view\main.cc]* into the project, where you see its the first include is:
+    ```
+      #include <openvdb/viewer/Viewer.h>
+    ```
+    - Add *openvdb* static lib project into your project reference (Proj. Properties -> Common Properties -> References -> Add New Reference...)
+    - You should be able to compile and run the viewer after this
+    - According to [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/), the viewer fails to initialize the gl function pointers before calling for each thread. So add "glewInit();" to some blocks like this:
   
   ```
     Viewer
@@ -178,6 +185,10 @@ This requires the basic knowledge on:
       glewInit(); // added
     }
   ```
+  
+  - Raytracer
+    - Similar to viewer building process, make project, add *[D:\libs\openvdb\v3.2.0\source\openvdb\cmd\openvdb_render]*, add lib reference, build and run
+    - Somehow I got msvcrt.lib/msvcrtd.lib not included error when compiling the sample raytracer. By adding msvcrt.lib/msvcrtd.lib into the linker manually (w.r.t. $(Configuration)) solves the problem. Still have no idea yet..
   
 ## Reference
  - [rchoetzlein/win_openvdb](https://github.com/rchoetzlein/win_openvdb)
