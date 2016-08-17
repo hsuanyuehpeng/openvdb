@@ -102,7 +102,8 @@ This requires the basic knowledge on:
       D:\libs\tbb\v44u5\source
     ```
   - python
-    - to be filled
+    - Download from [here](https://www.python.org/download/releases/2.7/) and make sure you click "Windows X86-64 MSI Installer (2.7.0)" for x64 installation
+    - python3 should also work, although in my openvdb build, I'm using python2
   
 ## Buliding OpenVDB lib
   - Preprocessor
@@ -158,7 +159,26 @@ This requires the basic knowledge on:
   - t
 
 ## Buliding OpenVDB viewer/raytracer samples
-  - Add glewInit() from [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/)
+  - According to [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/), the viewer fails to initialize the gl function pointers before calling for each thread. So add "glewInit();" to some blocks like this:
+  
+  ```
+    Viewer
+    init(const std::string&amp; progName, bool verbose)
+    {
+      glewInit();  // added
+      …
+    }
+  ```
+  ```
+    ShaderProgram::ShaderProgram():
+      mProgram(0),
+      mVertShader(0),
+      mFragShader(0)
+    {
+      glewInit(); // added
+    }
+  ```
+  
 ## Reference
  - [rchoetzlein/win_openvdb](https://github.com/rchoetzlein/win_openvdb)
  - [::nidclip](https://nidclip.wordpress.com/2014/02/25/compiling-openvdb-the-openvdb-viewer-on-windows-7/)
