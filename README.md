@@ -204,6 +204,7 @@ This requires the basic knowledge on:
   
   - Raytracer
     - Similar to viewer building process, make project, add *[D:\libs\openvdb\v3.2.0\source\openvdb\cmd\openvdb_render]*, add lib reference, build and run
+    - This raytracer doesn't have any gui, it only serves the sample tracer of using openvdb data structure. So we don't need to include glew/glfw here.
     - Somehow I got msvcrt.lib/msvcrtd.lib not included error when compiling the sample raytracer. By adding msvcrt.lib/msvcrtd.lib into the linker manually (w.r.t. $(Configuration)) solves the problem. Still have no idea yet..
   
 ## Reference
